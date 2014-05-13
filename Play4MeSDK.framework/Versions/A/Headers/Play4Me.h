@@ -14,7 +14,7 @@
 #define UNITY_TOUCH_MOVED                       3
 #define UNITY_PAUSE                             4
 
-#define DISPLAY_DATA_SIZE_LIMIT                 20
+#define DISPLAY_DATA_SIZE_LIMIT                 30
 
 
 typedef bool (*p4m_start_offline_play_callback) (const void* p_sync_data, int n_data_size);
@@ -129,6 +129,24 @@ extern "C" {
     bool p4m_cs_show_me_in_app(void);
     
     /*!
+     @function   p4m_cs_show_me_in_app
+     @abstract   show Play4Me In-app to user.
+     All the requests for help will be shown in In-app.
+     Also, game video and text, comment will be shown too.
+     Once this function is called, Unity engine will be suspended until user exit In-app.
+     
+     @param      p_search_data
+                Search data to be used in search.
+                Play4Me will search "p_search_data" in display data you passed before.
+     @param      n_data_size
+                size of "p_search_data"
+     
+     @result     An bool result status.
+     If false is returned, please check error code with "p4m_cs_get_last_error".
+     */
+    bool p4m_cs_show_me_in_app_search(void* p_search_data, int n_data_size);
+    
+    /*!
      @function   p4m_cs_send_request
      @abstract   send Play4Me request.
                 As Play4Me scenario, online request turns into offline request after 60 secs.
@@ -144,8 +162,8 @@ extern "C" {
                 This data will be displayed in Play4Me In-app.
                 You can pass text data whatever you want to display.
                 (Score, Level, Point will be OK)
-                Size is available up to 20 bytes.
-                If passed string is larger than 20 bytes, SDK will cut the rest.
+                Size is available up to 30 bytes.
+                If passed string is larger than 30 bytes, SDK will cut the rest.
      @param      n_display_data_size
                 size of "p_display_data"
      @result     An bool result status.
@@ -167,8 +185,8 @@ extern "C" {
                 This data will be displayed in Play4Me In-app.
                 You can pass text data whatever you want to display.
                 (Score, Level, Point will be OK)
-                Size is available up to 20 bytes.
-                If passed string is larger than 20 bytes, SDK will cut the rest.
+                Size is available up to 30 bytes.
+                If passed string is larger than 30 bytes, SDK will cut the rest.
      @param      n_display_data_size
                 size of "p_display_data"
      @result     An bool result status.
