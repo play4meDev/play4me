@@ -16,6 +16,10 @@
 
 #define DISPLAY_DATA_SIZE_LIMIT                 30
 
+#define OFFLINE_PLAY_VIDEO_QUALITY_LOW          0
+#define OFFLINE_PLAY_VIDEO_QUALITY_MEDIUM       1
+#define OFFLINE_PLAY_VIDEO_QUALITY_HIGH         2
+#define OFFLINE_PLAY_VIDEO_QUALITY_MAX          3
 
 typedef bool (*p4m_start_offline_play_callback) (const void* p_sync_data, int n_data_size);
 typedef bool (*p4m_input_result_data_callback) (const void* p_result_data, int n_data_size);
@@ -194,6 +198,24 @@ extern "C" {
      */
     bool p4m_cs_stop_offline_play(void* p_result_data, int n_data_size,
                                   char* p_display_data, int n_display_data_size);
+    
+    /*!
+     @function   p4m_cs_set_offline_play_record_quality
+     @abstract   Set recorded video quality during offline play.
+                If you don't set video quality, SDK use OFFLINE_PLAY_VIDEO_QUALITY_MAX as default.
+     @param      level
+                Level of quality.
+                This value can be OFFLINE_PLAY_VIDEO_QUALITY value.
+                Best quality makes larger video file.
+                    OFFLINE_PLAY_VIDEO_QUALITY_LOW          : 400K
+                    OFFLINE_PLAY_VIDEO_QUALITY_MEDIUM       : 600K
+                    OFFLINE_PLAY_VIDEO_QUALITY_HIGH         : 800K
+                    OFFLINE_PLAY_VIDEO_QUALITY_MAX          : 960K
+     
+     @result     An bool result status.
+     If false is returned, please check error code with "p4m_cs_get_last_error".
+     */
+    bool p4m_cs_set_offline_play_record_quality(int level);
     
 #if defined __cplusplus
 };
